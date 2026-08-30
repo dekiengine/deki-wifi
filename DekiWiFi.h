@@ -1,14 +1,14 @@
 #pragma once
 
 #include "IDekiWiFi.h"
-#include "DekiWiFiModule.h"
+#include "DekiWiFiPackage.h"
 
 /**
  * @brief Active-driver registry for WiFi (single-instance).
  *
- * Mirrors the DekiHttp / DekiGPS pattern: a platform integration module
- * registers its driver via SetCurrent() at DekiPlugin_RegisterModules time.
- * Consumers (location providers, future provisioning modules, game code)
+ * Mirrors the DekiHttp / DekiGPS pattern: a platform integration package
+ * registers its driver via SetCurrent() at DekiPlugin_RegisterPackages time.
+ * Consumers (location providers, future provisioning packages, game code)
  * reach the active driver via GetCurrent().
  *
  * Single-active rather than the multi-provider registry pattern: there is

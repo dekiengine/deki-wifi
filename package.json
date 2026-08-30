@@ -1,7 +1,7 @@
 {
   "id": "deki-wifi",
   "displayName": "WiFi (abstract)",
-  "buildDefine": "DEKI_MODULE_WIFI",
+  "buildDefine": "DEKI_PACKAGE_WIFI",
   "requires": [],
   "features": [],
   "dependencies": {

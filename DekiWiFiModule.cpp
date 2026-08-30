@@ -1,4 +1,4 @@
-#include "DekiWiFiModule.h"
+#include "DekiWiFiPackage.h"
 #include "DekiWiFi.h"
 #include "interop/DekiPlugin.h"
 #include "DekiLogSystem.h"
@@ -25,11 +25,11 @@ DEKI_WIFI_API int DekiWiFi_EnsureRegistered(void)
 #endif
 }
 
-DEKI_PLUGIN_API const char* DekiPlugin_GetName(void)    { return "Deki WiFi Module"; }
+DEKI_PLUGIN_API const char* DekiPlugin_GetName(void)    { return "Deki WiFi Package"; }
 DEKI_PLUGIN_API const char* DekiPlugin_GetVersion(void)
 {
-#ifdef DEKI_MODULE_VERSION
-    return DEKI_MODULE_VERSION;
+#ifdef DEKI_PACKAGE_VERSION
+    return DEKI_PACKAGE_VERSION;
 #else
     return "0.0.0-dev";
 #endif
@@ -44,7 +44,7 @@ DEKI_PLUGIN_API int  DekiPlugin_Init(void)
 
 DEKI_PLUGIN_API void DekiPlugin_Shutdown(void)
 {
-    // Null the active driver so a hot-reload of the integration module that
+    // Null the active driver so a hot-reload of the integration package that
     // owns it doesn't leave a dangling pointer to its vtable.
     DekiWiFi::SetCurrent(nullptr);
     s_WiFiRegistered = false;
@@ -70,11 +70,11 @@ DEKI_PLUGIN_API void DekiPlugin_RegisterComponents(void)
 }
 
 DEKI_PLUGIN_API int DekiPlugin_GetFeatureCount(void) { return 0; }
-DEKI_PLUGIN_API const struct DekiModuleFeatureInfo* DekiPlugin_GetFeature(int) { return nullptr; }
+DEKI_PLUGIN_API const struct DekiPackageFeatureInfo* DekiPlugin_GetFeature(int) { return nullptr; }
 
-// No providers registered here — this module owns only the interface and
+// No providers registered here — this package owns only the interface and
 // the SetCurrent/GetCurrent facade. Concrete drivers live in platform
-// integration modules and call DekiWiFi::SetCurrent themselves.
-DEKI_PLUGIN_API void DekiPlugin_RegisterModules(void) {}
+// integration packages and call DekiWiFi::SetCurrent themselves.
+DEKI_PLUGIN_API void DekiPlugin_RegisterPackages(void) {}
 
 }  // extern "C"

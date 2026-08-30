@@ -1,6 +1,6 @@
 #pragma once
 
-#include "providers/IDekiModule.h"
+#include "providers/IDekiPackage.h"
 #include <cstdint>
 #include <cstddef>
 
@@ -20,19 +20,19 @@ struct DekiAP
  *
  * Pure hardware abstraction: connect / disconnect / status / scan. No
  * credential storage, no provisioning UX, no auto-reconnect policy. Higher
- * layers (a boot helper, a captive-portal provisioning module, game code,
+ * layers (a boot helper, a captive-portal provisioning package, game code,
  * whoever) source credentials from wherever they please and call Connect()
  * explicitly.
  *
- * Implemented by whichever platform integration module is loaded at runtime.
- * The integration module registers its concrete driver with DekiWiFi::SetCurrent()
- * at module load. Single-active: there's one radio per chip, no multi-provider
+ * Implemented by whichever platform integration package is loaded at runtime.
+ * The integration package registers its concrete driver with DekiWiFi::SetCurrent()
+ * at package load. Single-active: there's one radio per chip, no multi-provider
  * registry needed for this category.
  */
-class IDekiWiFi : public IDekiModule
+class IDekiWiFi : public IDekiPackage
 {
 public:
-    const char* GetModuleCategory() const override { return "wifi"; }
+    const char* GetPackageCategory() const override { return "wifi"; }
 
     /// Connect to the given access point. Blocks up to timeoutMs.
     /// Returns true if associated and an IP was obtained within the timeout.
