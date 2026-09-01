@@ -7,7 +7,6 @@
  * @brief Active-driver registry for WiFi (single-instance).
  *
  * Mirrors the DekiHttp / DekiGPS pattern: a platform integration package
- * registers its driver via SetCurrent() at DekiPlugin_RegisterPackages time.
  * Consumers (location providers, future provisioning packages, game code)
  * reach the active driver via GetCurrent().
  *

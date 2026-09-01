@@ -34,7 +34,6 @@ DEKI_PLUGIN_API const char* DekiPlugin_GetVersion(void)
     return "0.0.0-dev";
 #endif
 }
-DEKI_PLUGIN_API const char* DekiPlugin_GetReflectionJson(void) { return "{}"; }
 
 DEKI_PLUGIN_API int  DekiPlugin_Init(void)
 {
@@ -69,12 +68,9 @@ DEKI_PLUGIN_API void DekiPlugin_RegisterComponents(void)
 #endif
 }
 
-DEKI_PLUGIN_API int DekiPlugin_GetFeatureCount(void) { return 0; }
-DEKI_PLUGIN_API const struct DekiPackageFeatureInfo* DekiPlugin_GetFeature(int) { return nullptr; }
 
-// No providers registered here — this package owns only the interface and
-// the SetCurrent/GetCurrent facade. Concrete drivers live in platform
-// integration packages and call DekiWiFi::SetCurrent themselves.
-DEKI_PLUGIN_API void DekiPlugin_RegisterPackages(void) {}
+// This package owns only the IDekiWiFi interface and the SetCurrent/GetCurrent
+// facade — it registers no provider of its own. Concrete drivers live in the
+// platform integration packages and call DekiWiFi::SetCurrent themselves.
 
 }  // extern "C"
