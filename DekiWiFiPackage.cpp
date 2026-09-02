@@ -1,3 +1,7 @@
+/**
+ * @file DekiWiFiPackage.cpp
+ * @brief Package entry point for deki-wifi
+ */
 #include "DekiWiFiPackage.h"
 #include "DekiWiFi.h"
 #include "interop/DekiPlugin.h"
