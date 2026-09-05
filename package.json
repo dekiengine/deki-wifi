@@ -1,7 +1,7 @@
 {
   "id": "deki-wifi",
   "displayName": "WiFi (abstract)",
-  "minEngine": "2.0.0",
+  "minEngine": "0.10.0",
   "buildDefine": "DEKI_PACKAGE_WIFI",
   "requires": [],
   "features": [],
