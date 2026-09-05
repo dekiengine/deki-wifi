@@ -10,7 +10,7 @@
 #ifdef DEKI_EDITOR
 extern void DekiWiFi_RegisterComponents();
 extern int  DekiWiFi_GetAutoComponentCount();
-extern const DekiComponentMeta* DekiWiFi_GetAutoComponentMeta(int index);
+extern const Deki::ComponentMeta* DekiWiFi_GetAutoComponentMeta(int index);
 #endif
 
 static bool s_WiFiRegistered = false;
@@ -55,13 +55,13 @@ DEKI_PLUGIN_API void DekiPlugin_Shutdown(void)
 
 #ifdef DEKI_EDITOR
 DEKI_PLUGIN_API int  DekiPlugin_GetComponentCount(void) { return DekiWiFi_GetAutoComponentCount(); }
-DEKI_PLUGIN_API const DekiComponentMeta* DekiPlugin_GetComponentMeta(int index)
+DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int index)
 {
     return DekiWiFi_GetAutoComponentMeta(index);
 }
 #else
 DEKI_PLUGIN_API int  DekiPlugin_GetComponentCount(void) { return 0; }
-DEKI_PLUGIN_API const DekiComponentMeta* DekiPlugin_GetComponentMeta(int) { return nullptr; }
+DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int) { return nullptr; }
 #endif
 
 DEKI_PLUGIN_API void DekiPlugin_RegisterComponents(void)

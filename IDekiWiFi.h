@@ -29,7 +29,7 @@ struct DekiAP
  * at package load. Single-active: there's one radio per chip, no multi-provider
  * registry needed for this category.
  */
-class IDekiWiFi : public IDekiPackage
+class IDekiWiFi : public Deki::IPackage
 {
 public:
     const char* GetPackageCategory() const override { return "wifi"; }
