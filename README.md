@@ -1,5 +1,7 @@
 # Deki WiFi
 
+Documentation: https://dekiengine.github.io/deki-wifi/ (components and properties, generated from the code)
+
 Abstract WiFi peripheral interface for the Deki Engine. Defines `IDekiWiFi`: connect, disconnect, connection state, and access point scanning.
 
 This package contains no radio driver of its own. A platform integration package (for example `deki-esp32-integration`) registers the concrete backend.
