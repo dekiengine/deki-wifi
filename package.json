@@ -1,0 +1,11 @@
+{
+  "id": "deki-wifi",
+  "displayName": "WiFi (abstract)",
+  "minEngine": "0.10.0",
+  "buildDefine": "DEKI_PACKAGE_WIFI",
+  "requires": [],
+  "features": [],
+  "dependencies": {
+    "espidf": []
+  }
+}
