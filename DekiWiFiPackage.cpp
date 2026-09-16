@@ -39,7 +39,7 @@ DEKI_WIFI_API int DekiWiFi_EnsureRegistered(void)
 #endif
 }
 
-DEKI_PLUGIN_API const char* DekiPlugin_GetName(void)    { return "DekiRendering::Deki WiFi Package"; }
+DEKI_PLUGIN_API const char* DekiPlugin_GetName(void)    { return "Deki WiFi Package"; }
 DEKI_PLUGIN_API const char* DekiPlugin_GetVersion(void)
 {
 #ifdef DEKI_PACKAGE_VERSION
