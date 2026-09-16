@@ -1,5 +1,8 @@
 #include "DekiWiFi.h"
 
+namespace DekiWifi
+{
+
 namespace {
     IDekiWiFi* s_Current = nullptr;
 }
@@ -13,3 +16,5 @@ IDekiWiFi* DekiWiFi::GetCurrent()
 {
     return s_Current;
 }
+
+}  // namespace DekiWifi

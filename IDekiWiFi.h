@@ -4,6 +4,9 @@
 #include <cstdint>
 #include <cstddef>
 
+namespace DekiWifi
+{
+
 /**
  * @brief One nearby WiFi access point reported by ScanAPs.
  */
@@ -57,3 +60,5 @@ public:
     /// Normally only used for power saving or when intentionally going offline.
     virtual void Shutdown() = 0;
 };
+
+}  // namespace DekiWifi

@@ -3,10 +3,13 @@
 #include "IDekiWiFi.h"
 #include "DekiWiFiPackage.h"
 
+namespace DekiWifi
+{
+
 /**
  * @brief Active-driver registry for WiFi (single-instance).
  *
- * Mirrors the DekiHttp / DekiGPS pattern: a platform integration package
+ * Mirrors the DekiHttp / DekiGps::DekiGPS pattern: a platform integration package
  * Consumers (location providers, future provisioning packages, game code)
  * reach the active driver via GetCurrent().
  *
@@ -22,3 +25,5 @@ public:
     static void       SetCurrent(IDekiWiFi* driver);
     static IDekiWiFi* GetCurrent();
 };
+
+}  // namespace DekiWifi

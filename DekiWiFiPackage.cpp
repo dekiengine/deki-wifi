@@ -7,29 +7,39 @@
 #include <deki/interop/Plugin.h>
 #include <deki/LogSystem.h>
 
-#ifdef DEKI_EDITOR
 extern void DekiWiFi_RegisterComponents();
 extern int  DekiWiFi_GetAutoComponentCount();
 extern const Deki::ComponentMeta* DekiWiFi_GetAutoComponentMeta(int index);
+
+namespace DekiWifi
+{
+
+#ifdef DEKI_EDITOR
 #endif
 
 static bool s_WiFiRegistered = false;
+
+
+}  // namespace DekiWifi
+// The exports below are C symbols at global scope; the package's own
+// registration helpers and statics live in its namespace.
+using namespace DekiWifi;
 
 extern "C" {
 
 DEKI_WIFI_API int DekiWiFi_EnsureRegistered(void)
 {
 #ifdef DEKI_EDITOR
-    if (s_WiFiRegistered) return DekiWiFi_GetAutoComponentCount();
+    if (s_WiFiRegistered) return ::DekiWiFi_GetAutoComponentCount();
     s_WiFiRegistered = true;
-    DekiWiFi_RegisterComponents();
-    return DekiWiFi_GetAutoComponentCount();
+    ::DekiWiFi_RegisterComponents();
+    return ::DekiWiFi_GetAutoComponentCount();
 #else
     return 0;
 #endif
 }
 
-DEKI_PLUGIN_API const char* DekiPlugin_GetName(void)    { return "Deki WiFi Package"; }
+DEKI_PLUGIN_API const char* DekiPlugin_GetName(void)    { return "DekiRendering::Deki WiFi Package"; }
 DEKI_PLUGIN_API const char* DekiPlugin_GetVersion(void)
 {
 #ifdef DEKI_PACKAGE_VERSION
@@ -54,10 +64,10 @@ DEKI_PLUGIN_API void DekiPlugin_Shutdown(void)
 }
 
 #ifdef DEKI_EDITOR
-DEKI_PLUGIN_API int  DekiPlugin_GetComponentCount(void) { return DekiWiFi_GetAutoComponentCount(); }
+DEKI_PLUGIN_API int  DekiPlugin_GetComponentCount(void) { return ::DekiWiFi_GetAutoComponentCount(); }
 DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int index)
 {
-    return DekiWiFi_GetAutoComponentMeta(index);
+    return ::DekiWiFi_GetAutoComponentMeta(index);
 }
 #else
 DEKI_PLUGIN_API int  DekiPlugin_GetComponentCount(void) { return 0; }
@@ -68,7 +78,7 @@ DEKI_PLUGIN_API void DekiPlugin_RegisterComponents(void)
 {
 #ifdef DEKI_EDITOR
     int n = DekiWiFi_EnsureRegistered();
-    DEKI_LOG_INFO("[deki-wifi] DekiPlugin_RegisterComponents -> %d component(s)", n);
+    DEKI_LOG_INFO("[deki-wifi] ::DekiPlugin_RegisterComponents -> %d component(s)", n);
 #endif
 }
 
@@ -78,3 +88,4 @@ DEKI_PLUGIN_API void DekiPlugin_RegisterComponents(void)
 // platform integration packages and call DekiWiFi::SetCurrent themselves.
 
 }  // extern "C"
+
