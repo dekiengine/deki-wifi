@@ -51,7 +51,6 @@ DEKI_PLUGIN_API const char* DekiPlugin_GetVersion(void)
 
 DEKI_PLUGIN_API int  DekiPlugin_Init(void)
 {
-    DEKI_LOG_INFO("[deki-wifi] DekiPlugin_Init");
     return 0;
 }
 
@@ -77,8 +76,7 @@ DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int) { re
 DEKI_PLUGIN_API void DekiPlugin_RegisterComponents(void)
 {
 #ifdef DEKI_EDITOR
-    int n = DekiWiFi_EnsureRegistered();
-    DEKI_LOG_INFO("[deki-wifi] ::DekiPlugin_RegisterComponents -> %d component(s)", n);
+    DekiWiFi_EnsureRegistered();
 #endif
 }
 
