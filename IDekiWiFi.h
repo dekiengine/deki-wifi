@@ -7,9 +7,7 @@
 namespace DekiWifi
 {
 
-/**
- * @brief One nearby WiFi access point reported by ScanAPs.
- */
+/// One nearby WiFi access point, as ScanAPs reports it.
 struct DekiAP
 {
     uint8_t bssid[6] = { 0, 0, 0, 0, 0, 0 };
@@ -18,46 +16,42 @@ struct DekiAP
     uint8_t channel = 0;
 };
 
-/**
- * @brief Abstract WiFi radio.
- *
- * Pure hardware abstraction: connect / disconnect / status / scan. No
- * credential storage, no provisioning UX, no auto-reconnect policy. Higher
- * layers (a boot helper, a captive-portal provisioning package, game code,
- * whoever) source credentials from wherever they please and call Connect()
- * explicitly.
- *
- * Implemented by whichever platform integration package is loaded at runtime.
- * The integration package registers its concrete driver with DekiWiFi::SetCurrent()
- * at package load. Single-active: there's one radio per chip, no multi-provider
- * registry needed for this category.
- */
+/// A WiFi radio.
+///
+/// Hardware only: connect, disconnect, status, scan. It stores no
+/// credentials, has no provisioning UI and no auto-reconnect policy. Higher
+/// layers (a boot helper, a provisioning package, game code) get credentials
+/// wherever they like and call Connect().
+///
+/// The platform integration package loaded at run time implements it and
+/// registers its driver with DekiWiFi::SetCurrent() at package load. One
+/// active driver: a chip has one radio.
 class IDekiWiFi : public Deki::IPackage
 {
 public:
     const char* GetPackageCategory() const override { return "wifi"; }
 
-    /// Connect to the given access point. Blocks up to timeoutMs.
-    /// Returns true if associated and an IP was obtained within the timeout.
-    /// On failure, the implementation logs the reason; subsequent IsConnected()
-    /// returns false. Calling Connect again with new credentials replaces the
-    /// previous attempt.
+    /// Connects to the access point, blocking up to timeoutMs. Returns true
+    /// if it associated and got an IP within the timeout. On failure the
+    /// implementation logs the reason and IsConnected() returns false.
+    /// Calling Connect again with new credentials replaces the previous
+    /// attempt.
     virtual bool Connect(const char* ssid, const char* password, uint32_t timeoutMs) = 0;
 
-    /// Disconnect from the current AP. Idempotent.
+    /// Disconnects from the current AP. Safe to call when not connected.
     virtual void Disconnect() = 0;
 
-    /// True iff the station is currently associated and has an IP.
+    /// True when the station is associated and has an IP.
     virtual bool IsConnected() const = 0;
 
-    /// Active scan of nearby APs. Blocks while scanning (typically ~2s).
-    /// Writes up to maxCount entries into `out`. Returns the number written,
-    /// or a negative value on driver error. Works while connected; the chip
-    /// may briefly drop the active connection on some implementations.
+    /// Actively scans for nearby APs, blocking while it scans (usually ~2 s).
+    /// Writes up to maxCount entries into `out` and returns how many, or a
+    /// negative value on a driver error. Works while connected, though some
+    /// chips briefly drop the connection.
     virtual int ScanAPs(DekiAP* out, int maxCount) = 0;
 
-    /// Tear down the WiFi stack. Calling Connect afterwards reinitialises.
-    /// Normally only used for power saving or when intentionally going offline.
+    /// Tears down the WiFi stack; a later Connect starts it again. For power
+    /// saving or going offline on purpose.
     virtual void Shutdown() = 0;
 };
 

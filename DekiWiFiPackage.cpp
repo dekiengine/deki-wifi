@@ -1,7 +1,4 @@
-/**
- * @file DekiWiFiPackage.cpp
- * @brief Package entry point for deki-wifi
- */
+// Package entry point of deki-wifi.
 #include "DekiWiFiPackage.h"
 #include "DekiWiFi.h"
 #include <deki/interop/Plugin.h>
@@ -61,8 +58,8 @@ extern "C"
 
     DEKI_PLUGIN_API void DekiPluginShutdown(void)
     {
-        // Null the active driver so a hot-reload of the integration package that
-        // owns it doesn't leave a dangling pointer to its vtable.
+        // Clear the active driver, so a hot reload of the integration package
+        // that owns it leaves no dangling pointer to its vtable.
         DekiWiFi::SetCurrent(nullptr);
         s_WiFiRegistered = false;
     }
@@ -94,8 +91,9 @@ extern "C"
 #endif
     }
 
-    // This package owns only the IDekiWiFi interface and the SetCurrent/GetCurrent
-    // facade — it registers no provider of its own. Concrete drivers live in the
-    // platform integration packages and call DekiWiFi::SetCurrent themselves.
+    // This package holds only the IDekiWiFi interface and the
+    // SetCurrent/GetCurrent facade; it registers no driver of its own. The
+    // drivers live in the platform integration packages and call
+    // DekiWiFi::SetCurrent themselves.
 
 }  // extern "C"

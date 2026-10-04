@@ -6,19 +6,16 @@
 namespace DekiWifi
 {
 
-/**
- * @brief Active-driver registry for WiFi (single-instance).
- *
- * Mirrors the DekiHttp / DekiGps::DekiGPS pattern: a platform integration package
- * Consumers (location providers, future provisioning packages, game code)
- * reach the active driver via GetCurrent().
- *
- * Single-active rather than the multi-provider registry pattern: there is
- * one WiFi radio per chip, swapping out the driver at runtime is not a
- * realistic use case. If a board ever ships a secondary radio (SPI WiFi
- * co-processor), we can switch this category to the multi-provider pattern
- * without changing consumers' call sites.
- */
+/// Holds the one active WiFi driver.
+///
+/// Like DekiHttp and DekiGps::DekiGPS: a platform integration package sets
+/// its driver with SetCurrent(), and consumers (location providers,
+/// provisioning, game code) reach it through GetCurrent().
+///
+/// One active driver, not a multi-provider registry: a chip has one WiFi
+/// radio, and swapping drivers at run time is not a real use. A board with a
+/// second radio (an SPI WiFi co-processor) could move this category to the
+/// multi-provider pattern without changing consumers' call sites.
 class DEKI_WIFI_API DekiWiFi
 {
 public:
