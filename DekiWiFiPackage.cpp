@@ -7,9 +7,9 @@
 #include <deki/interop/Plugin.h>
 #include <deki/LogSystem.h>
 
-extern void DekiWiFi_RegisterComponents();
-extern int DekiWiFi_GetAutoComponentCount();
-extern const Deki::ComponentMeta* DekiWiFi_GetAutoComponentMeta(int index);
+extern void DekiWiFiRegisterComponents();
+extern int DekiWiFiGetAutoComponentCount();
+extern const Deki::ComponentMeta* DekiWiFiGetAutoComponentMeta(int index);
 
 namespace DekiWifi
 {
@@ -26,26 +26,26 @@ using namespace DekiWifi;
 
 extern "C"
 {
-    DEKI_WIFI_API int DekiWiFi_EnsureRegistered(void)
+    DEKI_WIFI_API int DekiWiFiEnsureRegistered(void)
     {
 #ifdef DEKI_EDITOR
         if (s_WiFiRegistered)
         {
-            return ::DekiWiFi_GetAutoComponentCount();
+            return ::DekiWiFiGetAutoComponentCount();
         }
         s_WiFiRegistered = true;
-        ::DekiWiFi_RegisterComponents();
-        return ::DekiWiFi_GetAutoComponentCount();
+        ::DekiWiFiRegisterComponents();
+        return ::DekiWiFiGetAutoComponentCount();
 #else
         return 0;
 #endif
     }
 
-    DEKI_PLUGIN_API const char* DekiPlugin_GetName(void)
+    DEKI_PLUGIN_API const char* DekiPluginGetName(void)
     {
         return "Deki WiFi Package";
     }
-    DEKI_PLUGIN_API const char* DekiPlugin_GetVersion(void)
+    DEKI_PLUGIN_API const char* DekiPluginGetVersion(void)
     {
 #ifdef DEKI_PACKAGE_VERSION
         return DEKI_PACKAGE_VERSION;
@@ -54,12 +54,12 @@ extern "C"
 #endif
     }
 
-    DEKI_PLUGIN_API int DekiPlugin_Init(void)
+    DEKI_PLUGIN_API int DekiPluginInit(void)
     {
         return 0;
     }
 
-    DEKI_PLUGIN_API void DekiPlugin_Shutdown(void)
+    DEKI_PLUGIN_API void DekiPluginShutdown(void)
     {
         // Null the active driver so a hot-reload of the integration package that
         // owns it doesn't leave a dangling pointer to its vtable.
@@ -68,29 +68,29 @@ extern "C"
     }
 
 #ifdef DEKI_EDITOR
-    DEKI_PLUGIN_API int DekiPlugin_GetComponentCount(void)
+    DEKI_PLUGIN_API int DekiPluginGetComponentCount(void)
     {
-        return ::DekiWiFi_GetAutoComponentCount();
+        return ::DekiWiFiGetAutoComponentCount();
     }
-    DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int index)
+    DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPluginGetComponentMeta(int index)
     {
-        return ::DekiWiFi_GetAutoComponentMeta(index);
+        return ::DekiWiFiGetAutoComponentMeta(index);
     }
 #else
-    DEKI_PLUGIN_API int DekiPlugin_GetComponentCount(void)
+    DEKI_PLUGIN_API int DekiPluginGetComponentCount(void)
     {
         return 0;
     }
-    DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int)
+    DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPluginGetComponentMeta(int)
     {
         return nullptr;
     }
 #endif
 
-    DEKI_PLUGIN_API void DekiPlugin_RegisterComponents(void)
+    DEKI_PLUGIN_API void DekiPluginRegisterComponents(void)
     {
 #ifdef DEKI_EDITOR
-        DekiWiFi_EnsureRegistered();
+        DekiWiFiEnsureRegistered();
 #endif
     }
 
