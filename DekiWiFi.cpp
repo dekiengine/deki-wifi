@@ -3,8 +3,9 @@
 namespace DekiWifi
 {
 
-namespace {
-    IDekiWiFi* s_Current = nullptr;
+namespace
+{
+IDekiWiFi* s_Current = nullptr;
 }
 
 void DekiWiFi::SetCurrent(IDekiWiFi* driver)

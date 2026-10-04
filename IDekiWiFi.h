@@ -12,10 +12,10 @@ namespace DekiWifi
  */
 struct DekiAP
 {
-    uint8_t  bssid[6]    = {0, 0, 0, 0, 0, 0};
-    char     ssid[33]    = {0};   // null-terminated, up to 32 bytes per spec
-    int8_t   rssi        = 0;     // dBm
-    uint8_t  channel     = 0;
+    uint8_t bssid[6] = { 0, 0, 0, 0, 0, 0 };
+    char ssid[33] = { 0 };  // null-terminated, up to 32 bytes per spec
+    int8_t rssi = 0;        // dBm
+    uint8_t channel = 0;
 };
 
 /**
@@ -54,7 +54,7 @@ public:
     /// Writes up to maxCount entries into `out`. Returns the number written,
     /// or a negative value on driver error. Works while connected; the chip
     /// may briefly drop the active connection on some implementations.
-    virtual int  ScanAPs(DekiAP* out, int maxCount) = 0;
+    virtual int ScanAPs(DekiAP* out, int maxCount) = 0;
 
     /// Tear down the WiFi stack. Calling Connect afterwards reinitialises.
     /// Normally only used for power saving or when intentionally going offline.

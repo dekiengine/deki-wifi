@@ -8,7 +8,7 @@
 #include <deki/LogSystem.h>
 
 extern void DekiWiFi_RegisterComponents();
-extern int  DekiWiFi_GetAutoComponentCount();
+extern int DekiWiFi_GetAutoComponentCount();
 extern const Deki::ComponentMeta* DekiWiFi_GetAutoComponentMeta(int index);
 
 namespace DekiWifi
@@ -19,71 +19,83 @@ namespace DekiWifi
 
 static bool s_WiFiRegistered = false;
 
-
 }  // namespace DekiWifi
 // The exports below are C symbols at global scope; the package's own
 // registration helpers and statics live in its namespace.
 using namespace DekiWifi;
 
-extern "C" {
-
-DEKI_WIFI_API int DekiWiFi_EnsureRegistered(void)
+extern "C"
 {
+    DEKI_WIFI_API int DekiWiFi_EnsureRegistered(void)
+    {
 #ifdef DEKI_EDITOR
-    if (s_WiFiRegistered) return ::DekiWiFi_GetAutoComponentCount();
-    s_WiFiRegistered = true;
-    ::DekiWiFi_RegisterComponents();
-    return ::DekiWiFi_GetAutoComponentCount();
+        if (s_WiFiRegistered)
+        {
+            return ::DekiWiFi_GetAutoComponentCount();
+        }
+        s_WiFiRegistered = true;
+        ::DekiWiFi_RegisterComponents();
+        return ::DekiWiFi_GetAutoComponentCount();
 #else
-    return 0;
+        return 0;
 #endif
-}
+    }
 
-DEKI_PLUGIN_API const char* DekiPlugin_GetName(void)    { return "Deki WiFi Package"; }
-DEKI_PLUGIN_API const char* DekiPlugin_GetVersion(void)
-{
+    DEKI_PLUGIN_API const char* DekiPlugin_GetName(void)
+    {
+        return "Deki WiFi Package";
+    }
+    DEKI_PLUGIN_API const char* DekiPlugin_GetVersion(void)
+    {
 #ifdef DEKI_PACKAGE_VERSION
-    return DEKI_PACKAGE_VERSION;
+        return DEKI_PACKAGE_VERSION;
 #else
-    return "0.0.0-dev";
+        return "0.0.0-dev";
 #endif
-}
+    }
 
-DEKI_PLUGIN_API int  DekiPlugin_Init(void)
-{
-    return 0;
-}
+    DEKI_PLUGIN_API int DekiPlugin_Init(void)
+    {
+        return 0;
+    }
 
-DEKI_PLUGIN_API void DekiPlugin_Shutdown(void)
-{
-    // Null the active driver so a hot-reload of the integration package that
-    // owns it doesn't leave a dangling pointer to its vtable.
-    DekiWiFi::SetCurrent(nullptr);
-    s_WiFiRegistered = false;
-}
+    DEKI_PLUGIN_API void DekiPlugin_Shutdown(void)
+    {
+        // Null the active driver so a hot-reload of the integration package that
+        // owns it doesn't leave a dangling pointer to its vtable.
+        DekiWiFi::SetCurrent(nullptr);
+        s_WiFiRegistered = false;
+    }
 
 #ifdef DEKI_EDITOR
-DEKI_PLUGIN_API int  DekiPlugin_GetComponentCount(void) { return ::DekiWiFi_GetAutoComponentCount(); }
-DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int index)
-{
-    return ::DekiWiFi_GetAutoComponentMeta(index);
-}
+    DEKI_PLUGIN_API int DekiPlugin_GetComponentCount(void)
+    {
+        return ::DekiWiFi_GetAutoComponentCount();
+    }
+    DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int index)
+    {
+        return ::DekiWiFi_GetAutoComponentMeta(index);
+    }
 #else
-DEKI_PLUGIN_API int  DekiPlugin_GetComponentCount(void) { return 0; }
-DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int) { return nullptr; }
+    DEKI_PLUGIN_API int DekiPlugin_GetComponentCount(void)
+    {
+        return 0;
+    }
+    DEKI_PLUGIN_API const Deki::ComponentMeta* DekiPlugin_GetComponentMeta(int)
+    {
+        return nullptr;
+    }
 #endif
 
-DEKI_PLUGIN_API void DekiPlugin_RegisterComponents(void)
-{
+    DEKI_PLUGIN_API void DekiPlugin_RegisterComponents(void)
+    {
 #ifdef DEKI_EDITOR
-    DekiWiFi_EnsureRegistered();
+        DekiWiFi_EnsureRegistered();
 #endif
-}
+    }
 
-
-// This package owns only the IDekiWiFi interface and the SetCurrent/GetCurrent
-// facade — it registers no provider of its own. Concrete drivers live in the
-// platform integration packages and call DekiWiFi::SetCurrent themselves.
+    // This package owns only the IDekiWiFi interface and the SetCurrent/GetCurrent
+    // facade — it registers no provider of its own. Concrete drivers live in the
+    // platform integration packages and call DekiWiFi::SetCurrent themselves.
 
 }  // extern "C"
-

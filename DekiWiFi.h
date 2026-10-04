@@ -22,7 +22,7 @@ namespace DekiWifi
 class DEKI_WIFI_API DekiWiFi
 {
 public:
-    static void       SetCurrent(IDekiWiFi* driver);
+    static void SetCurrent(IDekiWiFi* driver);
     static IDekiWiFi* GetCurrent();
 };
 
