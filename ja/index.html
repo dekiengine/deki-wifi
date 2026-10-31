@@ -57,7 +57,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">deki-wifi<span id="projectnumber">&#160;0.21.0</span>
+   <div id="projectname">deki-wifi<span id="projectnumber">&#160;0.22.0</span>
    </div>
    <div id="projectbrief">Deki パッケージリファレンス</div>
   </td>
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 <img src="deki-wifi.png" alt=""/>
 </div>
     <p>Wi-Fi の抽象化。接続、切断、状態の報告を行います。具体的なバックエンドはプラットフォーム連携パッケージが提供します。</p>
-<p>リポジトリ: <a href="https://github.com/dekiengine/deki-wifi">github.com/dekiengine/deki-wifi</a> · 最新リリース: 0.19.0 · エンジン 0.19.0 以降が必要</p>
+<p>リポジトリ: <a href="https://github.com/dekiengine/deki-wifi">github.com/dekiengine/deki-wifi</a> · 最新リリース: 0.22.0 · エンジン 0.22.0 以降が必要</p>
 <p><span class="tt">DekiEditor --packages-add deki-wifi &lt;project&gt;</span> か、パッケージマネージャーからインストールします。エンジン自身のコンポーネントと C++ API は <a href="https://dekiengine.github.io/docs/ja/">Deki のドキュメント</a>にあります。</p>
 <p>エディターでは <b>WiFi (abstract)</b> と表示されます。</p>
 <p>このパッケージは、エンジンが呼び出すドライバーまたはライブラリです。詳しくは README を参照してください。</p>
@@ -123,24 +123,22 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 変更履歴</h1>
 <p>変更履歴は英語です。</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md0"></a>
-0.19.0</h2>
+0.22.0</h2>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Changed</h2>
+<ul>
+<li><span class="tt">minEngine</span> 0.22.0: built against engine 0.22.0. A build of this package from before does not load and is rebuilt.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+0.19.0</h2>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 Changed</h2>
 <ul>
 <li><span class="tt">minEngine</span> 0.19.0: built against engine 0.19.0, whose component metadata records the package each class is in. A build of this package from before does not load and is rebuilt.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
-0.18.0</h2>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
-Changed</h2>
-<ul>
-<li><span class="tt">minEngine</span> 0.18.0. Reflection ABI 21: the package must be rebuilt.</li>
-<li><b>Names follow the code style</b> (deki-engine/docs/codestyle): types, functions and enum values are PascalCase, constants kPascalCase, members m_PascalCase, locals and parameters camelCase. The code is formatted with clang-format 22.</li>
-<li>The functions the editor finds by name are PascalCase: DekiWiFiRegisterComponents, DekiWiFiGetAutoComponentCount, DekiWiFiEnsureRegistered and the rest. Built against engine ABI 21; a build of this package from before does not load and is rebuilt.</li>
-</ul>
 <p>それ以前のリリース: <a href="https://github.com/dekiengine/deki-wifi/blob/master/CHANGELOG.md">CHANGELOG.md</a></p>
 <hr  />
-<p>パッケージのリフレクションデータから生成しています (エンジン 0.21.0)。プロパティ名はシーンファイルで使われるキーです。名前を変えても別名が残ります (<a href="https://github.com/dekiengine/deki-editor/blob/master/COMPATIBILITY.md">互換性</a>)。 </p>
+<p>パッケージのリフレクションデータから生成しています (エンジン 0.22.0)。プロパティ名はシーンファイルで使われるキーです。名前を変えても別名が残ります (<a href="https://github.com/dekiengine/deki-editor/blob/master/COMPATIBILITY.md">互換性</a>)。 </p>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->

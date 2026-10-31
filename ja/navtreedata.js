@@ -26,9 +26,9 @@ var NAVTREE =
 [
   [ "deki-wifi", "index.html", [
     [ "変更履歴", "index.html#changelog", [
-      [ "0.19.0", "index.html#autotoc_md0", null ],
+      [ "0.22.0", "index.html#autotoc_md0", null ],
       [ "Changed", "index.html#autotoc_md1", null ],
-      [ "0.18.0", "index.html#autotoc_md2", null ],
+      [ "0.19.0", "index.html#autotoc_md2", null ],
       [ "Changed", "index.html#autotoc_md3", null ]
     ] ]
   ] ]
