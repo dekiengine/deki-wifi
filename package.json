@@ -3,6 +3,7 @@
   "displayName": "WiFi (abstract)",
   "minEngine": "0.40.0",
   "buildDefine": "DEKI_PACKAGE_WIFI",
+  "deviceNeeds": ["wifi"],
   "requires": [],
   "features": [],
   "dependencies": {
